@@ -8,14 +8,6 @@ public class LevelLoader : MonoBehaviour
     public static int currentLevelIndex;
     public static LevelData.Level levelToLoad;
 
-    public static LevelLoader instance;
-
-    private void Start()
-    {
-        if (!instance)
-            instance = this;
-    }
-
     public void LoadLevel(int index)
     {
         currentLevelIndex = index;
