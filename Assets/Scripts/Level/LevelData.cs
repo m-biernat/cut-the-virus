@@ -7,7 +7,7 @@ public class LevelData : MonoBehaviour
     public struct Level
     {
         public GameObject levelPrefab;
-        public float timeLimit;
+        public int timeLimit;
 
         public bool unlocked;
         public int rating;
