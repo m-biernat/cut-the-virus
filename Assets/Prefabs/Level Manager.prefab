@@ -58,7 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - levelPrefab: {fileID: 0}
-    timeLimit: 0
-    unlocked: 0
+  - levelPrefab: {fileID: 5023224552959780717, guid: 7851bdd7421caa6478d9310e82723784,
+      type: 3}
+    timeLimit: 10
+    unlocked: 1
     rating: 0
