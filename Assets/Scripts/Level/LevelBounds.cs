@@ -3,38 +3,38 @@
 [RequireComponent(typeof(LineRenderer))]
 public class LevelBounds : MonoBehaviour
 {
-    private LineRenderer _boundsRenderer;
+    private LineRenderer boundsRenderer;
 
-    private float _upperBound =  4.45f,
-                  _lowerBound = -5.5f,
-                  _leftBound = -3.5f,
-                  _rightBound = 3.5f;
+    public static readonly float upperBound =  4.45f,
+                                 lowerBound = -5.5f,
+                                 leftBound = -3.5f,
+                                 rightBound = 3.5f;
 
-    private Vector3[] _boundsPositions;
+    private Vector3[] boundsPositions;
 
     private void Start()
     {
-        _boundsRenderer = GetComponent<LineRenderer>();
+        boundsRenderer = GetComponent<LineRenderer>();
 
         SetBoundsPositions();
     }
 
     private void SetBoundsPositions()
     {
-        _boundsPositions = new Vector3[4];
+        boundsPositions = new Vector3[4];
 
-        _boundsPositions[0] = new Vector3(_leftBound, _lowerBound);
-        _boundsPositions[1] = new Vector3(_leftBound, _upperBound);
-        _boundsPositions[2] = new Vector3(_rightBound, _upperBound);
-        _boundsPositions[3] = new Vector3(_rightBound, _lowerBound);
+        boundsPositions[0] = new Vector3(leftBound, lowerBound);
+        boundsPositions[1] = new Vector3(leftBound, upperBound);
+        boundsPositions[2] = new Vector3(rightBound, upperBound);
+        boundsPositions[3] = new Vector3(rightBound, lowerBound);
 
-        _boundsRenderer.SetPositions(_boundsPositions);
+        boundsRenderer.SetPositions(boundsPositions);
     }
 
-    public bool CheckInBounds(Vector3 position)
+    public static bool CheckInBounds(Vector3 position)
     {
-        if ((position.x >= _lowerBound && position.x <= _upperBound) &&
-            (position.y >= _leftBound && position.y <= _rightBound))
+        if ((position.y >= lowerBound && position.y <= upperBound) &&
+            (position.x >= leftBound && position.x <= rightBound))
             return true;
         else
             return false;
