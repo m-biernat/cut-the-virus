@@ -60,6 +60,6 @@ MonoBehaviour:
   levels:
   - levelPrefab: {fileID: 5023224552959780717, guid: 7851bdd7421caa6478d9310e82723784,
       type: 3}
-    timeLimit: 10
+    timeLimit: 15
     unlocked: 1
     rating: 0

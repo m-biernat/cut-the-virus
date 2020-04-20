@@ -5,8 +5,8 @@ public class LevelBounds : MonoBehaviour
 {
     private LineRenderer _boundsRenderer;
 
-    private float _upperBound =  5.45f,
-                  _lowerBound = -4.5f,
+    private float _upperBound =  4.45f,
+                  _lowerBound = -5.5f,
                   _leftBound = -3.5f,
                   _rightBound = 3.5f;
 
