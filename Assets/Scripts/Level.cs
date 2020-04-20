@@ -1,44 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
 public class Level : MonoBehaviour
 {
-    private LineRenderer _boundsRenderer;
+    public List<GameObject> bloodCells;
+    public List<GameObject> viruses;
 
-    private float _upperBound =  5.45f,
-                  _lowerBound = -4.5f,
-                  _leftBound = -3.5f,
-                  _rightBound = 3.5f;
+    public delegate void OnAllyDestroyDelegate();
+    public OnAllyDestroyDelegate OnAllyDestroy;
 
-    private Vector3[] _boundsPositions;
+    public delegate void OnEnemyDestroyDelegate();
+    public OnEnemyDestroyDelegate OnEnemyDestroy;
 
     private void Start()
     {
-        _boundsRenderer = GetComponent<LineRenderer>();
+        foreach (var bloodCell in bloodCells)
+        {
+            // Add reference to Level
+        }
 
-        SetBoundsPositions();
+        foreach (var virus in viruses)
+        {
+            // Add reference to Level
+        }
     }
 
-    private void SetBoundsPositions()
+    public void DestroyAlly(GameObject go)
     {
-        _boundsPositions = new Vector3[4];
+        bloodCells.Remove(go);
+        Destroy(go);
 
-        _boundsPositions[0] = new Vector3(_leftBound, _lowerBound);
-        _boundsPositions[1] = new Vector3(_leftBound, _upperBound);
-        _boundsPositions[2] = new Vector3(_rightBound, _upperBound);
-        _boundsPositions[3] = new Vector3(_rightBound, _lowerBound);
-
-        _boundsRenderer.SetPositions(_boundsPositions);
+        OnAllyDestroy();
     }
 
-    public bool CheckInBounds(Vector3 position)
+    public void DestroyEnemy(GameObject go)
     {
-        if ((position.x >= _lowerBound && position.x <= _upperBound) &&
-            (position.y >= _leftBound && position.y <= _rightBound))
-            return true;
-        else
-            return false;
+        viruses.Remove(go);
+        Destroy(go);
+        
+        OnEnemyDestroy();
     }
 }
+
