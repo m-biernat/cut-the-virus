@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    public List<GameObject> bloodCells;
-    public List<GameObject> viruses;
+    public List<BloodCell> bloodCells;
+    public List<Virus> viruses;
 
     public delegate void OnAllyDestroyDelegate();
     public OnAllyDestroyDelegate OnAllyDestroy;
@@ -16,27 +16,27 @@ public class Level : MonoBehaviour
     {
         foreach (var bloodCell in bloodCells)
         {
-            // Add reference to Level
+            bloodCell.level = this;
         }
 
         foreach (var virus in viruses)
         {
-            // Add reference to Level
+            virus.level = this;
         }
     }
 
-    public void DestroyAlly(GameObject go)
+    public void Destroy(BloodCell bloodCell)
     {
-        bloodCells.Remove(go);
-        Destroy(go);
+        bloodCells.Remove(bloodCell);
+        Destroy(bloodCell.gameObject);
 
         OnAllyDestroy();
     }
 
-    public void DestroyEnemy(GameObject go)
+    public void Destroy(Virus virus)
     {
-        viruses.Remove(go);
-        Destroy(go);
+        viruses.Remove(virus);
+        Destroy(virus.gameObject);
         
         OnEnemyDestroy();
     }
