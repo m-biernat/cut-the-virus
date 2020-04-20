@@ -12,14 +12,18 @@ public class GameManager : MonoBehaviour
                 enemiesCount = 0, enemiesDestroyed = 0;
 
     public delegate void OnTickDelegate();
-    public static OnTickDelegate OnTick;
+    public static event OnTickDelegate OnTick;
 
     public delegate void OnTimesUpDelegate();
-    public static OnTimesUpDelegate OnTimesUp;
+    public static event OnTimesUpDelegate OnTimesUp;
+
+    public delegate void OnCompleteDelegate();
+    public static event OnCompleteDelegate OnComplete;
 
     private void Start()
     {
         InitGame();
+        Debug.Log($"Game has started with {enemiesCount} enemies and {alliesCount} allies.");
     }
 
     private void InitGame()
@@ -35,7 +39,13 @@ public class GameManager : MonoBehaviour
         alliesCount = level.bloodCells.Count;
         enemiesCount = level.viruses.Count;
 
+        level.enabled = true;
+
         // Init UI
+        
+        OnTick += () => { };
+        OnTimesUp += () => { };
+        OnComplete += () => { };
 
         StartCoroutine(Timer());
     }
@@ -43,16 +53,17 @@ public class GameManager : MonoBehaviour
     private void OnAllyDestroy()
     {
         alliesDestroyed++;
-        Debug.Log("Destroyed allies " + alliesDestroyed + " of " + alliesCount);
+        Debug.Log($"Destroyed allies {alliesDestroyed} of {alliesCount}");
     }
 
     private void OnEnemyDestroy()
     {
         enemiesDestroyed++;
-        Debug.Log("Destroyed enemies " + enemiesDestroyed + " of " + enemiesCount);
+        Debug.Log($"Destroyed enemies {enemiesDestroyed} of {enemiesCount}");
 
         if (enemiesDestroyed == enemiesCount)
         {
+            OnComplete();
             Debug.Log("Level complete");
         }
     }
@@ -66,15 +77,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < timeLimit; i++)
         {
             yield return delay;
-            
+
             timeLeft--;
             OnTick();
-            
-            Debug.Log("Time left: " + timeLeft + " of " + timeLimit + " s.");
+            Debug.Log($"Time left: {timeLeft} of {timeLimit} s.");
         }
 
         OnTimesUp();
-
         Debug.Log("Time's up!");
     }
 }

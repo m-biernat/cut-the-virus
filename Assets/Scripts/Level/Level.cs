@@ -7,10 +7,10 @@ public class Level : MonoBehaviour
     public List<Virus> viruses;
 
     public delegate void OnAllyDestroyDelegate();
-    public OnAllyDestroyDelegate OnAllyDestroy;
+    public event OnAllyDestroyDelegate OnAllyDestroy;
 
     public delegate void OnEnemyDestroyDelegate();
-    public OnEnemyDestroyDelegate OnEnemyDestroy;
+    public event OnEnemyDestroyDelegate OnEnemyDestroy;
 
     private void Start()
     {
