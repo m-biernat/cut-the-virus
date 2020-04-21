@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,11 +9,17 @@ public class PlayerController : MonoBehaviour
 
     private RaycastHit[] hits;
 
+    public GameObject playerPathRendererPrefab;
+    private PlayerPathRenderer pathRenderer;
+
     private void Start()
     {
         plane = new Plane(Vector3.back, 0.0f);
         mainCamera = Camera.main;
         position = Vector3.one;
+
+        GameObject go = Instantiate(playerPathRendererPrefab, transform.parent);
+        pathRenderer = go.GetComponent<PlayerPathRenderer>();
 
         //GameManager.OnComplete += OnGameEnd;
         //GameManager.OnTimesUp += OnGameEnd;
@@ -36,6 +43,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log(hit.collider.name);
                 }
+
+                pathRenderer.Clear();
             }
         }
     }
@@ -54,6 +63,8 @@ public class PlayerController : MonoBehaviour
         {
             position = nextPosition;
             DetectHits();
+            
+            pathRenderer.Draw(transform.position, position);
         }
     }
 

@@ -92,3 +92,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df26df6e39ca6b944bf14c8270616d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPathRendererPrefab: {fileID: 2517251533856639523, guid: b4c664b32970d784eb602fd6322f35a2,
+    type: 3}
