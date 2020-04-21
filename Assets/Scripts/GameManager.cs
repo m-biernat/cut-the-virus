@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private int alliesCount = 0, alliesDestroyed = 0,
                 enemiesCount = 0, enemiesDestroyed = 0;
 
+    public GameUI gameUI;
+
     public delegate void OnTickDelegate();
     public static event OnTickDelegate OnTick;
 
@@ -41,7 +43,7 @@ public class GameManager : MonoBehaviour
 
         level.enabled = true;
 
-        // Init UI
+        gameUI.Init(timeLimit);
         
         OnTick += () => { };
         OnTimesUp += () => { };
