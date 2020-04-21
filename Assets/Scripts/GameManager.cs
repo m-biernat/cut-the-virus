@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         gameUI.Init(timeLimit);
         
-        OnTick += () => { };
+        //OnTick += () => { };
         OnTimesUp += () => { };
         OnComplete += () => { };
 

@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
         GameObject go = Instantiate(playerPathRendererPrefab, transform.parent);
         pathRenderer = go.GetComponent<PlayerPathRenderer>();
 
-        //GameManager.OnComplete += OnGameEnd;
-        //GameManager.OnTimesUp += OnGameEnd;
+        GameManager.OnComplete += OnGameEnd;
+        GameManager.OnTimesUp += OnGameEnd;
     }
 
     private void Update()
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
 
                 foreach (var hit in hits)
                 {
-                    Debug.Log(hit.collider.name);
+                    hit.collider.gameObject.GetComponent<IDestructible>().Destroy();
                 }
             }
 
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     { 
         foreach(var hit in hits)
         {
-            if (hit.collider.GetComponent<Virus>() != null)
+            if (hit.collider.tag == "Virus")
             {
                 isMovePossible = true;
                 return;

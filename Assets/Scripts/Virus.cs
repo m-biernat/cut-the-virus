@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Virus : MonoBehaviour
+public class Virus : MonoBehaviour, IDestructible
 {
     [HideInInspector]
     public Level level;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class BloodCell : MonoBehaviour
+public class BloodCell : MonoBehaviour, IDestructible
 {
     [HideInInspector]
     public Level level;
