@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 
             timeLeft--;
             OnTick();
-            Debug.Log($"Time left: {timeLeft} of {timeLimit} s.");
+            //Debug.Log($"Time left: {timeLeft} of {timeLimit} s.");
         }
 
         OnTimesUp();

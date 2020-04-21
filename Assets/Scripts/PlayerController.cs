@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,11 +11,15 @@ public class PlayerController : MonoBehaviour
     public GameObject playerPathRendererPrefab;
     private PlayerPathRenderer pathRenderer;
 
+    private bool isMovePossible;
+
     private void Start()
     {
         plane = new Plane(Vector3.back, 0.0f);
         mainCamera = Camera.main;
         position = Vector3.one;
+
+        isMovePossible = false;
 
         GameObject go = Instantiate(playerPathRendererPrefab, transform.parent);
         pathRenderer = go.GetComponent<PlayerPathRenderer>();
@@ -29,12 +32,26 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            CalculatePosition();
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            float distanceToPlane;
+
+            Vector3 nextPosition = Vector3.one;
+
+            if (plane.Raycast(ray, out distanceToPlane))
+                nextPosition = ray.GetPoint(distanceToPlane);
+
+            if (LevelBounds.CheckInBounds(nextPosition))
+            {
+                position = nextPosition;
+                DetectHits();
+                CheckIfMoveIsPossible();
+                pathRenderer.Draw(transform.position, position, isMovePossible);
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (position != Vector3.one)
+            if (position != Vector3.one && isMovePossible)
             {
                 transform.position = position;
                 position = Vector3.one;
@@ -43,28 +60,9 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log(hit.collider.name);
                 }
-
-                pathRenderer.Clear();
             }
-        }
-    }
 
-    private void CalculatePosition()
-    {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-        float distanceToPlane;
-
-        Vector3 nextPosition = Vector3.one;
-
-        if (plane.Raycast(ray, out distanceToPlane))
-            nextPosition = ray.GetPoint(distanceToPlane);
-
-        if (LevelBounds.CheckInBounds(nextPosition))
-        {
-            position = nextPosition;
-            DetectHits();
-            
-            pathRenderer.Draw(transform.position, position);
+            pathRenderer.Clear();
         }
     }
 
@@ -76,6 +74,19 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = heading / distance;
 
         hits = Physics.RaycastAll(transform.position, direction, distance);
+    }
+
+    private void CheckIfMoveIsPossible()
+    { 
+        foreach(var hit in hits)
+        {
+            if (hit.collider.GetComponent<Virus>() != null)
+            {
+                isMovePossible = true;
+                return;
+            }
+        }
+        isMovePossible = false;
     }
 
     private void OnGameEnd()
