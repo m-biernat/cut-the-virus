@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         {
             OnComplete();
             Debug.Log("Level complete");
+            gameObject.SetActive(false);
         }
     }
 
@@ -85,5 +86,6 @@ public class GameManager : MonoBehaviour
 
         OnTimesUp();
         Debug.Log("Time's up!");
+        gameObject.SetActive(false);
     }
 }
