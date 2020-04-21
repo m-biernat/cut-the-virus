@@ -25,7 +25,6 @@ public class GameUI : MonoBehaviour
     {
         currTime--;
         clockText.text = currTime.ToString();
-        float fillAmount = currTime / time;
-        clockFill.fillAmount = fillAmount;
+        clockFill.fillAmount = currTime / (float)time;
     }
 }
