@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnGameEnd()
     {
+        pathRenderer.Clear();
         enabled = false;
     }
 }
