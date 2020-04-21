@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
     private Camera mainCamera;
     private Vector3 position;
 
+    private RaycastHit[] hits;
+
     private void Start()
     {
         plane = new Plane(Vector3.back, 0.0f);
@@ -29,6 +31,11 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = position;
                 position = Vector3.one;
+
+                foreach (var hit in hits)
+                {
+                    Debug.Log(hit.collider.name);
+                }
             }
         }
     }
@@ -44,7 +51,20 @@ public class PlayerController : MonoBehaviour
             nextPosition = ray.GetPoint(distanceToPlane);
 
         if (LevelBounds.CheckInBounds(nextPosition))
+        {
             position = nextPosition;
+            DetectHits();
+        }
+    }
+
+    private void DetectHits()
+    {
+        Vector3 heading = position - transform.position;
+
+        float distance = heading.magnitude;
+        Vector3 direction = heading / distance;
+
+        hits = Physics.RaycastAll(transform.position, direction, distance);
     }
 
     private void OnGameEnd()
