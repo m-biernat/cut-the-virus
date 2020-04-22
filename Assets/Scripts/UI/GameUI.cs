@@ -43,7 +43,7 @@ public class GameUI : MonoBehaviour
 
     private void OnComplete()
     {
-        if (levelLoader.IsNextLevelAvailable())
+        if (!levelLoader.IsNextLevelAvailable())
             nextLevel.interactable = false;
 
         complete.SetActive(true);
