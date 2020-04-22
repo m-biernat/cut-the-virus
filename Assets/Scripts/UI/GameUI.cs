@@ -14,9 +14,9 @@ public class GameUI : MonoBehaviour
     
     void Start()
     {
-        GameManager.OnTick += OnClockUpdate;
-        GameManager.OnTimesUp += OnTimesUp;
-        GameManager.OnComplete += OnComplete;
+        GameManager.instance.OnTick += OnClockUpdate;
+        GameManager.instance.OnTimesUp += OnTimesUp;
+        GameManager.instance.OnComplete += OnComplete;
     }
 
     public void Init(int time)

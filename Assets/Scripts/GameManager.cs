@@ -14,16 +14,19 @@ public class GameManager : MonoBehaviour
     public GameUI gameUI;
 
     public delegate void OnTickDelegate();
-    public static event OnTickDelegate OnTick;
+    public event OnTickDelegate OnTick;
 
     public delegate void OnTimesUpDelegate();
-    public static event OnTimesUpDelegate OnTimesUp;
+    public event OnTimesUpDelegate OnTimesUp;
 
     public delegate void OnCompleteDelegate();
-    public static event OnCompleteDelegate OnComplete;
+    public event OnCompleteDelegate OnComplete;
+
+    public static GameManager instance;
 
     private void Start()
     {
+        instance = this;
         InitGame();
         Debug.Log($"Game has started with {enemiesCount} enemies and {alliesCount} allies.");
     }

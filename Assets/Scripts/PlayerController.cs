@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
         GameObject go = Instantiate(playerPathRendererPrefab, transform.parent);
         pathRenderer = go.GetComponent<PlayerPathRenderer>();
 
-        GameManager.OnComplete += OnGameEnd;
-        GameManager.OnTimesUp += OnGameEnd;
+        GameManager.instance.OnComplete += OnGameEnd;
+        GameManager.instance.OnTimesUp += OnGameEnd;
     }
 
     private void Update()
