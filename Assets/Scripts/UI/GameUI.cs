@@ -11,7 +11,9 @@ public class GameUI : MonoBehaviour
     public GameObject timesUp, complete;
 
     public LevelLoader levelLoader;
-    
+
+    public Button nextLevel;
+        
     void Start()
     {
         GameManager.instance.OnTick += OnClockUpdate;
@@ -41,6 +43,9 @@ public class GameUI : MonoBehaviour
 
     private void OnComplete()
     {
+        if (levelLoader.IsNextLevelAvailable())
+            nextLevel.interactable = false;
+
         complete.SetActive(true);
     }
 
@@ -51,7 +56,16 @@ public class GameUI : MonoBehaviour
 
     public void Restart()
     {
-        levelLoader.LoadLevel(LevelLoader.currentLevelIndex);
+        levelLoader.ReloadLevel();
     }
 
+    public void SelectLevel()
+    {
+        levelLoader.LoadMenu(true);
+    }
+
+    public void NextLevel()
+    {
+        levelLoader.LoadNextLevel();
+    }
 }
