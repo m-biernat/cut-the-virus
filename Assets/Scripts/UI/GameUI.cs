@@ -46,7 +46,7 @@ public class GameUI : MonoBehaviour
 
     public void MainMenu()
     {
-        levelLoader.LoadMenu();
+        levelLoader.LoadMenu(false);
     }
 
     public void Restart()
