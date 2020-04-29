@@ -78,15 +78,12 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.5f);
 
-        OnTick();
-
         WaitForSecondsRealtime delay = new WaitForSecondsRealtime(1.0f);
 
         for (int i = 0; i < timeLimit; i++)
         {
-            yield return delay;
-
             OnTick();
+            yield return delay;
         }
 
         OnTimesUp();

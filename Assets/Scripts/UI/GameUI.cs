@@ -23,8 +23,8 @@ public class GameUI : MonoBehaviour
 
     public void Init(int time)
     {
-        this.time = time + 1;
-        currTime = time + 1;
+        this.time = time;
+        currTime = time;
         clockText.text = time.ToString();
         enabled = true;
     }
@@ -32,18 +32,18 @@ public class GameUI : MonoBehaviour
     private void OnClockUpdate()
     {
         currTime--;
-        clockText.text = currTime.ToString();
 
         float from = clockFill.fillAmount;
         float to = currTime / (float)time;
 
         LeanTween.value(from, to, 1)
-            .setOnUpdate(fill => clockFill.fillAmount = fill);
+            .setOnUpdate(fill => clockFill.fillAmount = fill)
+            .setOnComplete(() => clockText.text = currTime.ToString());
     }
 
     private void OnTimesUp()
     {
-        timesUp.SetActive(true);
+        FadeIn(timesUp);
     }
 
     private void OnComplete()
@@ -51,7 +51,20 @@ public class GameUI : MonoBehaviour
         if (!levelLoader.IsNextLevelAvailable())
             nextLevel.interactable = false;
 
-        complete.SetActive(true);
+        FadeIn(complete);
+    }
+
+    private void FadeIn(GameObject gameObject)
+    {
+        CanvasGroup canvas = gameObject.GetComponent<CanvasGroup>();
+
+        var seq = LeanTween.sequence();
+        seq.append(1);
+        seq.append(() => {
+            canvas.alpha = 0;
+            gameObject.SetActive(true);
+        });
+        seq.append(() => canvas.LeanAlpha(1, 0.1f));
     }
 
     public void MainMenu()

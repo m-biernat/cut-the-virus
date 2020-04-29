@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1001,6 +1001,7 @@ GameObject:
   - component: {fileID: 813966537}
   - component: {fileID: 813966539}
   - component: {fileID: 813966538}
+  - component: {fileID: 813966540}
   m_Layer: 5
   m_Name: TimesUp
   m_TagString: Untagged
@@ -1066,6 +1067,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813966536}
   m_CullTransparentMesh: 0
+--- !u!225 &813966540
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813966536}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &826021040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2426,6 +2439,7 @@ GameObject:
   - component: {fileID: 1903227077}
   - component: {fileID: 1903227079}
   - component: {fileID: 1903227078}
+  - component: {fileID: 1903227080}
   m_Layer: 5
   m_Name: Complete
   m_TagString: Untagged
@@ -2492,6 +2506,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903227076}
   m_CullTransparentMesh: 0
+--- !u!225 &1903227080
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903227076}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1969523924
 GameObject:
   m_ObjectHideFlags: 0
