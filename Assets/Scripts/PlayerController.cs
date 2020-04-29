@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public GameObject playerPathRendererPrefab;
     private PlayerPathRenderer pathRenderer;
 
-    private bool isMovePossible;
+    private bool isMovePossible, isPlayerMoving;
 
     private void Start()
     {
@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
         position = Vector3.one;
 
         isMovePossible = false;
+        isPlayerMoving = false;
 
         GameObject go = Instantiate(playerPathRendererPrefab, transform.parent);
         pathRenderer = go.GetComponent<PlayerPathRenderer>();
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !isPlayerMoving)
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             float distanceToPlane;
@@ -53,13 +54,20 @@ public class PlayerController : MonoBehaviour
         {
             if (position != Vector3.one && isMovePossible)
             {
-                transform.position = position;
-                position = Vector3.one;
+                isPlayerMoving = true;
 
-                foreach (var hit in hits)
-                {
-                    hit.collider.gameObject.GetComponent<IDestructible>().Destroy();
-                }
+                LeanTween.move(gameObject, position, .25f)
+                    .setOnComplete(() =>
+                    {
+                        position = Vector3.one;
+
+                        foreach (var hit in hits)
+                        {
+                            hit.collider.gameObject.GetComponent<IDestructible>().Destroy();
+                        }
+
+                        isPlayerMoving = false;
+                    });
             }
 
             pathRenderer.Clear();
