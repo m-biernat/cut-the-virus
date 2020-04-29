@@ -51,21 +51,21 @@ public class GameUI : MonoBehaviour
 
     public void MainMenu()
     {
-        levelLoader.LoadMenu(false);
+        Fade.instance.FadeOut(() => levelLoader.LoadMenu(false));
     }
 
     public void Restart()
     {
-        levelLoader.ReloadLevel();
+        Fade.instance.FadeOut(() => levelLoader.ReloadLevel());
     }
 
     public void SelectLevel()
     {
-        levelLoader.LoadMenu(true);
+        Fade.instance.FadeOut(() => levelLoader.LoadMenu(true));
     }
 
     public void NextLevel()
     {
-        levelLoader.LoadNextLevel();
+        Fade.instance.FadeOut(() => levelLoader.LoadNextLevel());
     }
 }

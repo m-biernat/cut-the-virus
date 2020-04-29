@@ -12,7 +12,7 @@ public class GridButtonUI : MonoBehaviour
 
     public void EnterLevel()
     {
-        levelLoader.LoadLevel(index);
+        Fade.instance.FadeOut(() => levelLoader.LoadLevel(index));
     }
 
     public void SetUpButton(LevelLoader levelLoader, int index, bool unlocked)
