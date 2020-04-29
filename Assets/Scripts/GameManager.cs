@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,14 +14,9 @@ public class GameManager : MonoBehaviour
 
     public GameUI gameUI;
 
-    public delegate void OnTickDelegate();
-    public event OnTickDelegate OnTick;
-
-    public delegate void OnTimesUpDelegate();
-    public event OnTimesUpDelegate OnTimesUp;
-
-    public delegate void OnCompleteDelegate();
-    public event OnCompleteDelegate OnComplete;
+    public event Action OnTick;
+    public event Action OnTimesUp;
+    public event Action OnComplete;
 
     public static GameManager instance;
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Level : MonoBehaviour
@@ -6,11 +7,8 @@ public class Level : MonoBehaviour
     public List<BloodCell> bloodCells;
     public List<Virus> viruses;
 
-    public delegate void OnAllyDestroyDelegate();
-    public event OnAllyDestroyDelegate OnAllyDestroy;
-
-    public delegate void OnEnemyDestroyDelegate();
-    public event OnEnemyDestroyDelegate OnEnemyDestroy;
+    public event Action OnAllyDestroy;
+    public event Action OnEnemyDestroy;
 
     private void Start()
     {
