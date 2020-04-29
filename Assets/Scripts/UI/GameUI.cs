@@ -23,8 +23,8 @@ public class GameUI : MonoBehaviour
 
     public void Init(int time)
     {
-        this.time = time;
-        currTime = time;
+        this.time = time + 1;
+        currTime = time + 1;
         clockText.text = time.ToString();
         enabled = true;
     }
@@ -33,7 +33,12 @@ public class GameUI : MonoBehaviour
     {
         currTime--;
         clockText.text = currTime.ToString();
-        clockFill.fillAmount = currTime / (float)time;
+
+        float from = clockFill.fillAmount;
+        float to = currTime / (float)time;
+
+        LeanTween.value(from, to, 1)
+            .setOnUpdate(fill => clockFill.fillAmount = fill);
     }
 
     private void OnTimesUp()

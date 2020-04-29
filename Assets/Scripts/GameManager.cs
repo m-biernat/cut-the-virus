@@ -76,7 +76,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        timeLeft = timeLimit;
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        OnTick();
 
         WaitForSecondsRealtime delay = new WaitForSecondsRealtime(1.0f);
 
@@ -84,9 +86,7 @@ public class GameManager : MonoBehaviour
         {
             yield return delay;
 
-            timeLeft--;
             OnTick();
-            //Debug.Log($"Time left: {timeLeft} of {timeLimit} s.");
         }
 
         OnTimesUp();
