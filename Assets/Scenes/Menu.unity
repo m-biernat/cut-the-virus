@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 9a7becc23ac0bd74eb09fa18e15ca963, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -2268,7 +2268,7 @@ PrefabInstance:
     - target: {fileID: 7305934347862720051, guid: a8baebec2a5577346b3c1486d7fef909,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7305934347862720051, guid: a8baebec2a5577346b3c1486d7fef909,
         type: 3}
@@ -2691,7 +2691,7 @@ Camera:
   m_GameObject: {fileID: 1712147265}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.6981132, g: 0.26673195, b: 0.28891736, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
