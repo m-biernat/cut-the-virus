@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
                         foreach (var hit in hits)
                         {
-                            hit.collider.gameObject.GetComponent<IDestructible>().Destroy();
+                            hit.collider.gameObject.GetComponent<Destructible>().Destroy();
                         }
 
                         isPlayerMoving = false;

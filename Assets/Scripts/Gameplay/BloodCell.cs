@@ -1,12 +1,9 @@
-﻿using UnityEngine;
-
-public class BloodCell : MonoBehaviour, IDestructible
+﻿public class BloodCell : Destructible
 {
-    [HideInInspector]
-    public Level level;
-
-    public void Destroy()
+    public override void Destroy()
     {
-        level.Destroy(this);
+        onDestroy = () => level.Destroy(this);
+        base.Destroy();
     }
 }
+
