@@ -85,16 +85,18 @@ public class PlayerController : MonoBehaviour
     }
 
     private void CheckIfMoveIsPossible()
-    { 
-        foreach(var hit in hits)
+    {
+        bool virusFound = false, fatFound = false;
+
+        foreach (var hit in hits)
         {
             if (hit.collider.tag == "Virus")
-            {
-                isMovePossible = true;
-                return;
-            }
+                virusFound = true;
+            if (hit.collider.tag == "Fat")
+                fatFound = true;
         }
-        isMovePossible = false;
+        
+        isMovePossible = virusFound && !fatFound;
     }
 
     private void OnGameEnd()
