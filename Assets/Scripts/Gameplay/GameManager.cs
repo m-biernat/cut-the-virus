@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int timeLimit = 0,
-                      timeLeft = 0;
+    public static int timeLeft = 0;
 
     private Level level = null;
 
@@ -32,7 +31,7 @@ public class GameManager : MonoBehaviour
         GameObject go = Instantiate(LevelLoader.levelToLoad.levelPrefab);
 
         level = go.GetComponent<Level>();
-        timeLimit = LevelLoader.levelToLoad.timeLimit;
+        timeLeft = LevelLoader.levelToLoad.timeLimit;
 
         level.OnAllyDestroy += OnAllyDestroy;
         level.OnEnemyDestroy += OnEnemyDestroy;
@@ -42,7 +41,7 @@ public class GameManager : MonoBehaviour
 
         level.enabled = true;
 
-        gameUI.Init(timeLimit);
+        gameUI.Init(timeLeft);
         
         //OnTick += () => { };
         //OnTimesUp += () => { };
@@ -76,7 +75,7 @@ public class GameManager : MonoBehaviour
 
         WaitForSecondsRealtime delay = new WaitForSecondsRealtime(1.0f);
 
-        for (int i = 0; i < timeLimit; i++)
+        for (; timeLeft > 0 ; timeLeft--)
         {
             OnTick();
             yield return delay;

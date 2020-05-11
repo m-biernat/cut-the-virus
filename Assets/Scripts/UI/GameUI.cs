@@ -6,7 +6,7 @@ public class GameUI : MonoBehaviour
     public Image clockFill;
     public Text clockText;
 
-    private int time, currTime;
+    private int time;
 
     public GameObject timesUp, complete;
 
@@ -24,14 +24,13 @@ public class GameUI : MonoBehaviour
     public void Init(int time)
     {
         this.time = time;
-        currTime = time;
         clockText.text = time.ToString();
         enabled = true;
     }
 
     private void OnClockUpdate()
     {
-        currTime--;
+        int currTime = GameManager.timeLeft - 1;
 
         float from = clockFill.fillAmount;
         float to = currTime / (float)time;
