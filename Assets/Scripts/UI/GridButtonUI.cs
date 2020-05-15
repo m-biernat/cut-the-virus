@@ -19,7 +19,7 @@ public class GridButtonUI : MonoBehaviour
     {
         this.levelLoader = levelLoader;
         this.index = index;
-        label.text = (index + 1).ToString();
+        label.text = index.ToString();
         if (!unlocked)
             button.interactable = false;
     }
