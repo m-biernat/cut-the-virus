@@ -1,15 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MuteButton : MonoBehaviour
 {
+    private Image image;
+
+    public Sprite soundOn, soundOff;
+
     private void Start()
     {
-        // Check if muted and set icon
+        image = GetComponent<Image>();
+
+        if (AudioManager.isMuted)
+            image.sprite = soundOff;
+        else
+            image.sprite = soundOn;
     }
 
     public void Toggle()
     {
         AudioManager.Toggle();
-        // Set icon
+
+        if (image.sprite == soundOn)
+            image.sprite = soundOff;
+        else
+            image.sprite = soundOn;
     }
 }
