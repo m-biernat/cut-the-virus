@@ -38,11 +38,14 @@ public class GameUI : MonoBehaviour
         LeanTween.value(from, to, 1)
             .setOnUpdate(fill => clockFill.fillAmount = fill)
             .setOnComplete(() => clockText.text = currTime.ToString());
+
+        AudioManager.Play(SFX.Tick);
     }
 
     private void OnTimesUp()
     {
         FadeIn(timesUp);
+        AudioManager.Play(SFX.Failure);
     }
 
     private void OnComplete()
@@ -51,6 +54,7 @@ public class GameUI : MonoBehaviour
             nextLevel.interactable = false;
 
         FadeIn(complete);
+        AudioManager.Play(SFX.Success);
     }
 
     private void FadeIn(GameObject gameObject)
@@ -68,21 +72,25 @@ public class GameUI : MonoBehaviour
 
     public void MainMenu()
     {
+        AudioManager.Play(SFX.Click);
         Fade.instance.FadeOut(() => levelLoader.LoadMenu(false));
     }
 
     public void Restart()
     {
+        AudioManager.Play(SFX.Click);
         Fade.instance.FadeOut(() => levelLoader.ReloadLevel());
     }
 
     public void SelectLevel()
     {
+        AudioManager.Play(SFX.Click);
         Fade.instance.FadeOut(() => levelLoader.LoadMenu(true));
     }
 
     public void NextLevel()
     {
+        AudioManager.Play(SFX.Click);
         Fade.instance.FadeOut(() => levelLoader.LoadNextLevel());
     }
 }

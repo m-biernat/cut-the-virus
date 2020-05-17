@@ -68,6 +68,8 @@ public class PlayerController : MonoBehaviour
 
                         isPlayerMoving = false;
                     });
+
+                AudioManager.Play(SFX.Slash);
             }
 
             pathRenderer.Clear();

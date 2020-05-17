@@ -12,6 +12,8 @@ public class GridButtonUI : MonoBehaviour
 
     public void EnterLevel()
     {
+        AudioManager.Play(SFX.Click);
+
         Fade.instance.FadeOut(() => levelLoader.LoadLevel(index));
     }
 

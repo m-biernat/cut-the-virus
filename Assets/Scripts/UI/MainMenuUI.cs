@@ -50,6 +50,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void ChangeView(GameObject to)
     {
+        AudioManager.Play(SFX.Click);
+
         FadeToView(currentView, to);
         currentView = to;
     }
@@ -72,6 +74,8 @@ public class MainMenuUI : MonoBehaviour
 
     public void QuitGame()
     {
+        AudioManager.Play(SFX.Click);
+        
         Application.Quit();
     }
 }

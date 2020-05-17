@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
     public static bool isMuted = false;
 
     private static AudioManager instance;
+
+    public List<AudioSource> sfx;
 
     private void Awake()
     {
@@ -31,4 +34,21 @@ public class AudioManager : MonoBehaviour
                 break;
         }
     }
+
+    public static void Play(SFX effectName)
+    {
+        instance.sfx[(int)effectName].Play();
+    }
 }
+
+public enum SFX
+{ 
+    Collect,
+    Death,
+    Failure,
+    Slash,
+    Success,
+    Click,
+    Tick
+};
+
