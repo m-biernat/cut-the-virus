@@ -44,7 +44,7 @@ public class MainMenuUI : MonoBehaviour
             GameObject go = Instantiate(buttonPrefab, content);
 
             GridButtonUI btn = go.GetComponent<GridButtonUI>();
-            btn.SetUpButton(levelLoader, i, levelData.levels[i].unlocked);
+            btn.SetUpButton(levelLoader, i, levelData.levels[i]);
         }
     }
 

@@ -2,7 +2,13 @@
 {
     public override void Destroy()
     {
-        onDestroy = () => level.Destroy(this);
+        level.DestroyAlly();
+        
+        onDestroy = () => {
+            level.bloodCells.Remove(this);
+            Destroy(gameObject);
+        };
+        
         base.Destroy();
     }
 }

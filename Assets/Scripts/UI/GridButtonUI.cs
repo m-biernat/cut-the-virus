@@ -8,6 +8,15 @@ public class GridButtonUI : MonoBehaviour
     public Button button;
     public Text label;
 
+    [Space]
+    public Image locked;
+
+    [Space]
+    public Image[] stars;
+
+    [Space]
+    public Color starColor;
+
     private int index;
 
     public void EnterLevel()
@@ -17,12 +26,27 @@ public class GridButtonUI : MonoBehaviour
         Fade.instance.FadeOut(() => levelLoader.LoadLevel(index));
     }
 
-    public void SetUpButton(LevelLoader levelLoader, int index, bool unlocked)
+    public void SetUpButton(LevelLoader levelLoader, int index, LevelData.Level level)
     {
-        this.levelLoader = levelLoader;
-        this.index = index;
-        label.text = index.ToString();
-        if (!unlocked)
+        if (level.unlocked)
+        {
+            this.levelLoader = levelLoader;
+            this.index = index;
+            label.text = (index + 1).ToString();
+
+            for (int i = 0; i < level.rating; i++)
+            {
+                stars[i].color = starColor;
+            }
+        }
+        else
+        {
             button.interactable = false;
+            
+            label.gameObject.SetActive(false);
+            locked.gameObject.SetActive(true);
+
+            stars[0].transform.parent.gameObject.SetActive(false);
+        }
     }
 }

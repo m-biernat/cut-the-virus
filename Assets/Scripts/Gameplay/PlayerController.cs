@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
                 isPlayerMoving = true;
 
                 LeanTween.move(gameObject, position, .25f)
+                    .setEaseInExpo()
                     .setOnComplete(() =>
                     {
                         position = Vector3.one;

@@ -1,19 +1,30 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
     public Image clockFill;
     public Text clockText;
+    public Color clockTextColor;
 
     private int time;
 
-    public GameObject timesUp, complete;
+    [Space]
+    public GameObject timesUp;
+    public GameObject complete;
 
+    [Space]
     public LevelLoader levelLoader;
 
     public Button nextLevel;
-        
+
+    [Space]
+    public Image[] stars;
+    public Color starColor;    
+
+    private int clockID;
+
     void Start()
     {
         GameManager.instance.OnTick += OnClockUpdate;
@@ -35,29 +46,43 @@ public class GameUI : MonoBehaviour
         float from = clockFill.fillAmount;
         float to = currTime / (float)time;
 
-        LeanTween.value(from, to, 1)
+        clockID = LeanTween.value(from, to, 1)
             .setOnUpdate(fill => clockFill.fillAmount = fill)
-            .setOnComplete(() => clockText.text = currTime.ToString());
+            .setOnComplete(() => {
+                if (currTime == 0)
+                    clockText.color = clockTextColor;
+                clockText.text = currTime.ToString();
+                })
+            .id;
+
+        if (currTime < 3)
+            clockText.rectTransform
+                .LeanScale(new Vector3(1.25f, 1.25f), 0.25f).setEaseInOutBounce()
+                .setOnComplete(() => clockText.rectTransform.localScale = Vector3.one);
 
         AudioManager.Play(SFX.Tick);
     }
 
     private void OnTimesUp()
     {
-        FadeIn(timesUp);
         AudioManager.Play(SFX.Failure);
+        LeanTween.cancel(clockID);
+        
+        FadeIn(timesUp);
     }
 
     private void OnComplete()
     {
+        AudioManager.Play(SFX.Success);
+        LeanTween.cancel(clockID);
+
         if (!levelLoader.IsNextLevelAvailable())
             nextLevel.interactable = false;
 
-        FadeIn(complete);
-        AudioManager.Play(SFX.Success);
+        FadeIn(complete, () => ShowStar(0));
     }
 
-    private void FadeIn(GameObject gameObject)
+    private void FadeIn(GameObject gameObject, Action onComplete = null)
     {
         CanvasGroup canvas = gameObject.GetComponent<CanvasGroup>();
 
@@ -68,6 +93,25 @@ public class GameUI : MonoBehaviour
             gameObject.SetActive(true);
         });
         seq.append(() => canvas.LeanAlpha(1, 0.1f));
+        seq.append(onComplete);
+    }
+
+    private void ShowStar(int n)
+    {
+        if (n < GameManager.instance.rating)
+        {
+            var star = Instantiate(stars[n], stars[n].transform.parent);
+            var scale = star.rectTransform.localScale;
+            
+            star.rectTransform.localScale = Vector3.zero;
+            star.color = starColor;
+
+            star.rectTransform.LeanScale(scale, 0.2f)
+                .setEaseOutElastic()
+                .setOnComplete(() => ShowStar(n + 1));
+            
+            AudioManager.Play(SFX.Collect);
+        }
     }
 
     public void MainMenu()

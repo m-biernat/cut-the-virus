@@ -23,11 +23,8 @@ public class Level : MonoBehaviour
         }
     }
 
-    public void Destroy(BloodCell bloodCell)
+    public void DestroyAlly()
     {
-        bloodCells.Remove(bloodCell);
-        Destroy(bloodCell.gameObject);
-
         OnAllyDestroy();
     }
 

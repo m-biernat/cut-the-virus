@@ -19,11 +19,16 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    [HideInInspector] 
+    public int rating = 0;
+    [SerializeField]
+    private LevelData levelData = null;
+
     private void Start()
     {
         instance = this;
         InitGame();
-        Debug.Log($"Game has started with {enemiesCount} enemies and {alliesCount} allies.");
+        //Debug.Log($"Game has started with {enemiesCount} enemies and {alliesCount} allies.");
     }
 
     private void InitGame()
@@ -53,18 +58,18 @@ public class GameManager : MonoBehaviour
     private void OnAllyDestroy()
     {
         alliesDestroyed++;
-        Debug.Log($"Destroyed allies {alliesDestroyed} of {alliesCount}");
+        //Debug.Log($"Destroyed allies {alliesDestroyed} of {alliesCount}");
     }
 
     private void OnEnemyDestroy()
     {
         enemiesDestroyed++;
-        Debug.Log($"Destroyed enemies {enemiesDestroyed} of {enemiesCount}");
+        //Debug.Log($"Destroyed enemies {enemiesDestroyed} of {enemiesCount}");
 
         if (enemiesDestroyed == enemiesCount)
         {
+            Complete();
             OnComplete();
-            Debug.Log("Level complete");
             gameObject.SetActive(false);
         }
     }
@@ -82,8 +87,40 @@ public class GameManager : MonoBehaviour
         }
 
         OnTimesUp();
-        Debug.Log("Time's up!");
         gameObject.SetActive(false);
+    }
+
+    public void Complete()
+    {
+        int index = LevelLoader.currentLevelIndex;
+        var level = levelData.levels[index];
+
+        bool progress = false;
+
+        //Debug.Log("Allies destroyed " + alliesDestroyed);
+
+        if (alliesDestroyed < 2)
+            rating = 3 - alliesDestroyed;
+        else
+            rating = 1;
+
+        if (level.rating < rating)
+        {
+            levelData.SetRating(index, rating);
+            progress = true;
+        }
+
+        index++;
+
+        if (index < levelData.levels.Count 
+            && !levelData.levels[index].unlocked)
+        {
+            levelData.Unlock(index);
+            progress = true;
+        }
+            
+        if (progress)
+            levelData.Save();
     }
 
     private void OnDestroy()

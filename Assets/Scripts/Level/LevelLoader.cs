@@ -35,7 +35,8 @@ public class LevelLoader : MonoBehaviour
     {
         int nextLevelIndex = currentLevelIndex + 1;
 
-        if (levelData.levels[nextLevelIndex].unlocked)
+        if (levelData.levels.Count > nextLevelIndex &&
+            levelData.levels[nextLevelIndex].unlocked)
             return true;
         else
             return false;
