@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            if (position != Vector3.one && isMovePossible)
+            if (position != Vector3.one && isMovePossible && !isPlayerMoving)
             {
                 isPlayerMoving = true;
 
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
             if (hit.collider.tag == "Fat")
                 fatFound = true;
         }
-        
+
         isMovePossible = virusFound && !fatFound;
     }
 

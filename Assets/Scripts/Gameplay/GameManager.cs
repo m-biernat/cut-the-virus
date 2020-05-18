@@ -24,6 +24,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private LevelData levelData = null;
 
+    [HideInInspector]
+    public bool failed = false;
+
+    [HideInInspector]
+    public bool hasEnded = false;
+
     private void Start()
     {
         instance = this;
@@ -59,6 +65,9 @@ public class GameManager : MonoBehaviour
     {
         alliesDestroyed++;
         //Debug.Log($"Destroyed allies {alliesDestroyed} of {alliesCount}");
+
+        if (alliesDestroyed > 3)
+            failed = true;     
     }
 
     private void OnEnemyDestroy()
@@ -66,11 +75,21 @@ public class GameManager : MonoBehaviour
         enemiesDestroyed++;
         //Debug.Log($"Destroyed enemies {enemiesDestroyed} of {enemiesCount}");
 
-        if (enemiesDestroyed == enemiesCount)
+        if (enemiesDestroyed == enemiesCount || failed)
         {
-            Complete();
-            OnComplete();
-            gameObject.SetActive(false);
+            if (failed)
+            {
+                OnTimesUp();
+                hasEnded = true;
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                Complete();
+                OnComplete();
+                hasEnded = true;
+                gameObject.SetActive(false);
+            }
         }
     }
 
@@ -87,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
 
         OnTimesUp();
+        hasEnded = true;
         gameObject.SetActive(false);
     }
 
@@ -99,10 +119,7 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log("Allies destroyed " + alliesDestroyed);
 
-        if (alliesDestroyed < 2)
-            rating = 3 - alliesDestroyed;
-        else
-            rating = 1;
+        rating = 3 - alliesDestroyed;
 
         if (level.rating < rating)
         {

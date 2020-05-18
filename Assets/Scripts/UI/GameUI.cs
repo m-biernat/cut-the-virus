@@ -65,14 +65,23 @@ public class GameUI : MonoBehaviour
 
     private void OnTimesUp()
     {
+        if (GameManager.instance.hasEnded)
+            return;
+
         AudioManager.Play(SFX.Failure);
         LeanTween.cancel(clockID);
-        
+
+        if (GameManager.instance.failed)
+            timesUp.GetComponentInChildren<Text>().text = "FAILED!";
+
         FadeIn(timesUp);
     }
 
     private void OnComplete()
     {
+        if (GameManager.instance.hasEnded)
+            return;
+
         AudioManager.Play(SFX.Success);
         LeanTween.cancel(clockID);
 
