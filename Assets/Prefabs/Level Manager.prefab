@@ -60,36 +60,31 @@ MonoBehaviour:
   levels:
   - levelPrefab: {fileID: 5023224552959780717, guid: 31ae9328eb3f41d419a1fd5df9ede47b,
       type: 3}
-    timeLimit: 15
+    timeLimit: 5
     unlocked: 1
     rating: 0
   - levelPrefab: {fileID: 5023224552959780717, guid: 2262ed9ec6dab214b8ee7da7e16bea2a,
       type: 3}
-    timeLimit: 15
+    timeLimit: 5
     unlocked: 1
     rating: 0
   - levelPrefab: {fileID: 5023224552959780717, guid: 72aaa7a0e596a534c9c0ef24e2b0aef1,
       type: 3}
-    timeLimit: 15
+    timeLimit: 7
     unlocked: 1
     rating: 0
   - levelPrefab: {fileID: 5023224552959780717, guid: 416bf8ff6926b2947a277f4c07f40fd3,
       type: 3}
-    timeLimit: 30
+    timeLimit: 10
     unlocked: 1
     rating: 0
   - levelPrefab: {fileID: 5023224552959780717, guid: c0044f4e711050240b70ace1edd81b1f,
       type: 3}
-    timeLimit: 45
+    timeLimit: 12
     unlocked: 1
     rating: 0
   - levelPrefab: {fileID: 5023224552959780717, guid: 57646545d36299f42b8ce0aa9ae9ad79,
       type: 3}
-    timeLimit: 45
-    unlocked: 1
-    rating: 0
-  - levelPrefab: {fileID: 5023224552959780717, guid: 7851bdd7421caa6478d9310e82723784,
-      type: 3}
     timeLimit: 15
-    unlocked: 0
+    unlocked: 1
     rating: 0
