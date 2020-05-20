@@ -18,7 +18,17 @@ public class MainMenuUI : MonoBehaviour
     [Space]
     public float fadeSpeed = 0.25f;
 
-    void Start()
+    [Space]
+    public GameObject quitButton;
+
+    private void Awake()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        quitButton.SetActive(false);
+#endif
+    }
+
+    private void Start()
     {
         InitLevelGrid();
 
