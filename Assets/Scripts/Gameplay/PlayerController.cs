@@ -41,13 +41,13 @@ public class PlayerController : MonoBehaviour
             if (plane.Raycast(ray, out distanceToPlane))
                 nextPosition = ray.GetPoint(distanceToPlane);
 
-            if (LevelBounds.CheckInBounds(nextPosition))
-            {
-                position = nextPosition;
-                DetectHits();
-                CheckIfMoveIsPossible();
-                pathRenderer.Draw(transform.position, position, isMovePossible);
-            }
+            LevelBounds.KeepInBounds(ref nextPosition);
+            position = nextPosition;
+
+            DetectHits();
+            CheckIfMoveIsPossible();
+
+            pathRenderer.Draw(transform.position, position, isMovePossible);
         }
 
         if (Input.GetMouseButtonUp(0))

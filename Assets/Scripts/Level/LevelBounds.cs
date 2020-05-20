@@ -31,12 +31,16 @@ public class LevelBounds : MonoBehaviour
         boundsRenderer.SetPositions(boundsPositions);
     }
 
-    public static bool CheckInBounds(Vector3 position)
+    public static void KeepInBounds(ref Vector3 position)
     {
-        if ((position.y >= lowerBound && position.y <= upperBound) &&
-            (position.x >= leftBound && position.x <= rightBound))
-            return true;
-        else
-            return false;
+        if (position.y < lowerBound)
+            position.y = lowerBound;
+        else if (position.y > upperBound)
+            position.y = upperBound;
+
+        if (position.x < leftBound)
+            position.x = leftBound;
+        else if (position.x > rightBound)
+            position.x = rightBound;
     }
 }
