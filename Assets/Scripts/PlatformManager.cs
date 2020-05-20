@@ -1,19 +1,29 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlatformManager : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
+    public LevelLoader levelLoader;
 
+#if UNITY_WEBGL
     private void Awake()
     {
-#if UNITY_WEBGL
         canvasScaler.matchWidthOrHeight = 1.0f;
+    }
 #endif
 
 #if UNITY_ANDROID
+    private void Awake()
+    {
         FixAspectRatio();
-#endif
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            BackButtonEvent();
     }
 
     private void FixAspectRatio()
@@ -40,4 +50,19 @@ public class PlatformManager : MonoBehaviour
     {
         Camera.main.fieldOfView = value;
     }
+
+    private void BackButtonEvent()
+    {
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            AudioManager.Play(SFX.Click);
+            Application.Quit();
+        }
+        else
+        {
+            AudioManager.Play(SFX.Click);
+            Fade.instance.FadeOut(() => levelLoader.LoadMenu(false));
+        }
+    }
+#endif
 }

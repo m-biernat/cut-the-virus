@@ -1867,6 +1867,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasScaler: {fileID: 127288134}
+  levelLoader: {fileID: 222326102}
 --- !u!4 &1346255289
 Transform:
   m_ObjectHideFlags: 0
