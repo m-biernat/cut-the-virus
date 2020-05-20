@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isMovePossible, isPlayerMoving;
 
+    private float upperBound;
+
     private void Start()
     {
         plane = new Plane(Vector3.back, 0.0f);
@@ -24,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
         GameObject go = Instantiate(playerPathRendererPrefab, transform.parent);
         pathRenderer = go.GetComponent<PlayerPathRenderer>();
+
+        upperBound = LevelBounds.upperBound + 0.1f;
 
         GameManager.instance.OnComplete += OnGameEnd;
         GameManager.instance.OnTimesUp += OnGameEnd;
@@ -41,13 +45,16 @@ public class PlayerController : MonoBehaviour
             if (plane.Raycast(ray, out distanceToPlane))
                 nextPosition = ray.GetPoint(distanceToPlane);
 
-            LevelBounds.KeepInBounds(ref nextPosition);
-            position = nextPosition;
+            if (nextPosition.y <= upperBound)
+            {
+                LevelBounds.KeepInBounds(ref nextPosition);
+                position = nextPosition;
 
-            DetectHits();
-            CheckIfMoveIsPossible();
+                DetectHits();
+                CheckIfMoveIsPossible();
 
-            pathRenderer.Draw(transform.position, position, isMovePossible);
+                pathRenderer.Draw(transform.position, position, isMovePossible);
+            }
         }
 
         if (Input.GetMouseButtonUp(0))
