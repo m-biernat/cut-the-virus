@@ -90,16 +90,29 @@ public class PlayerController : MonoBehaviour
     private void CheckIfMoveIsPossible()
     {
         bool virusFound = false, fatFound = false;
+        Vector3 lastVirusPosition = Vector3.zero;
 
         foreach (var hit in hits)
         {
             if (hit.collider.tag == "Virus")
+            {
                 virusFound = true;
+                lastVirusPosition = hit.collider.transform.position;
+            }
+
             if (hit.collider.tag == "Fat")
                 fatFound = true;
         }
 
         isMovePossible = virusFound && !fatFound;
+
+        if (isMovePossible)
+        {
+            float distance = Vector3.Distance(lastVirusPosition, position);
+
+            if (distance < 0.5f)
+                isMovePossible = false;
+        }
     }
 
     private void OnGameEnd()
