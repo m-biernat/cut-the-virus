@@ -93,3 +93,4 @@ MonoBehaviour:
     timeLimit: 30
     unlocked: 1
     rating: 0
+  unlockAll: 1

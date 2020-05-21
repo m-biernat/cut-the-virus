@@ -13,6 +13,9 @@ public class LevelData : MonoBehaviour
         public int rating;
     }
 
+    [SerializeField]
+    private bool unlockAll = false;
+
     public List<Level> levels;
 
     private static char[] savedData = null;
@@ -28,6 +31,16 @@ public class LevelData : MonoBehaviour
         }    
 
         LoadSavedData();
+
+#if UNITY_EDITOR
+        if (unlockAll)
+        {
+            foreach (var level in levels)
+            {
+                level.unlocked = true;
+            }
+        }
+#endif
     }
 
     private void SetDefault()
