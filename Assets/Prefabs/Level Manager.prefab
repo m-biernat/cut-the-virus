@@ -57,6 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0479b595f8b8f864ab5354e295b293be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unlockAll: 1
   levels:
   - levelPrefab: {fileID: 5023224552959780717, guid: 31ae9328eb3f41d419a1fd5df9ede47b,
       type: 3}
@@ -90,7 +91,6 @@ MonoBehaviour:
     rating: 0
   - levelPrefab: {fileID: 5023224552959780717, guid: cd41eeeb1c66d3e42be93abaf1aa491c,
       type: 3}
-    timeLimit: 30
+    timeLimit: 20
     unlocked: 1
     rating: 0
-  unlockAll: 1
