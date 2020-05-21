@@ -88,7 +88,7 @@ MonoBehaviour:
     timeLimit: 15
     unlocked: 1
     rating: 0
-  - levelPrefab: {fileID: 5023224552959780717, guid: 7851bdd7421caa6478d9310e82723784,
+  - levelPrefab: {fileID: 5023224552959780717, guid: cd41eeeb1c66d3e42be93abaf1aa491c,
       type: 3}
     timeLimit: 30
     unlocked: 1
