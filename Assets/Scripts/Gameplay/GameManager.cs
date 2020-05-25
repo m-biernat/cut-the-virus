@@ -13,7 +13,11 @@ public class GameManager : MonoBehaviour
 
     public GameUI gameUI;
 
+    public event Action OnCountdown;
+    public event Action OnStart;
+
     public event Action OnTick;
+
     public event Action OnTimesUp;
     public event Action OnComplete;
 
@@ -29,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool hasEnded = false;
+
+    public int countdown = 3;
 
     private void Start()
     {
@@ -95,9 +101,23 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.1f);
 
-        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(1.0f);
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(0.33f);
+
+        for (; countdown >= 0; countdown--)
+        {
+            OnCountdown();
+            
+            if (countdown > 0)
+                yield return delay;
+        }
+
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        OnStart();
+
+        delay = new WaitForSecondsRealtime(1.0f);
 
         for (; timeLeft > 0 ; timeLeft--)
         {

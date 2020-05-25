@@ -25,9 +25,14 @@ public class GameUI : MonoBehaviour
 
     private int clockID;
 
+    [Space]
+    public Text countdown;
+    private Vector3 countdownScale = new Vector3(1.25f, 1.25f);
+
     void Start()
     {
         GameManager.instance.OnTick += OnClockUpdate;
+        GameManager.instance.OnCountdown += OnCountdown;
         GameManager.instance.OnTimesUp += OnTimesUp;
         GameManager.instance.OnComplete += OnComplete;
     }
@@ -37,6 +42,7 @@ public class GameUI : MonoBehaviour
         this.time = time;
         clockText.text = time.ToString();
         enabled = true;
+        countdown.text = "";
     }
 
     private void OnClockUpdate()
@@ -61,6 +67,30 @@ public class GameUI : MonoBehaviour
                 .setOnComplete(() => clockText.rectTransform.localScale = Vector3.one);
 
         AudioManager.Play(SFX.Tick);
+    }
+
+    private void OnCountdown()
+    {
+        if (GameManager.instance.countdown > 0)
+        {
+            countdown.rectTransform.localScale = Vector3.one;
+            
+            countdown.text = GameManager.instance.countdown.ToString();
+
+            LeanTween.scale(countdown.rectTransform, countdownScale, 0.33f)
+                .setEaseOutElastic();
+            
+            AudioManager.Play(SFX.Tick);
+        }   
+        else
+        {
+            GameObject go = countdown.transform.parent.gameObject;
+            
+            go.GetComponent<CanvasGroup>().LeanAlpha(0, 0.1f)
+                .setOnComplete(() => go.SetActive(false));
+
+            AudioManager.Play(SFX.Click);
+        }   
     }
 
     private void OnTimesUp()
