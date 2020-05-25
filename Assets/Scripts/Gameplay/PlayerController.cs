@@ -29,8 +29,11 @@ public class PlayerController : MonoBehaviour
 
         upperBound = LevelBounds.upperBound + 0.1f;
 
+        GameManager.instance.OnStart += OnGameStart;
         GameManager.instance.OnComplete += OnGameEnd;
         GameManager.instance.OnTimesUp += OnGameEnd;
+
+        enabled = false;
     }
 
     private void Update()
@@ -120,6 +123,11 @@ public class PlayerController : MonoBehaviour
             if (distance < 0.5f)
                 isMovePossible = false;
         }
+    }
+
+    private void OnGameStart()
+    {
+        enabled = true;
     }
 
     private void OnGameEnd()
