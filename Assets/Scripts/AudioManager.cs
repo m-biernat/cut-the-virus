@@ -49,6 +49,8 @@ public enum SFX
     Slash,
     Success,
     Click,
-    Tick
+    Tick,
+    Countdown,
+    Go
 };
 

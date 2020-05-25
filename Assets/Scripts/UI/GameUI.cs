@@ -86,7 +86,7 @@ public class GameUI : MonoBehaviour
             LeanTween.scale(countdown.rectTransform, countdownScale, 0.33f)
                 .setEaseOutElastic();
             
-            AudioManager.Play(SFX.Tick);
+            AudioManager.Play(SFX.Countdown);
         }   
         else
         {
@@ -95,7 +95,7 @@ public class GameUI : MonoBehaviour
             go.GetComponent<CanvasGroup>().LeanAlpha(0, 0.1f)
                 .setOnComplete(() => go.SetActive(false));
 
-            AudioManager.Play(SFX.Click);
+            AudioManager.Play(SFX.Go);
         }   
     }
 
