@@ -29,10 +29,16 @@ public class GameUI : MonoBehaviour
     public Text countdown;
     private Vector3 countdownScale = new Vector3(1.25f, 1.25f);
 
+    [Space]
+    public Text starCount;
+
     void Start()
     {
-        GameManager.instance.OnTick += OnClockUpdate;
         GameManager.instance.OnCountdown += OnCountdown;
+
+        GameManager.instance.OnTick += OnClockUpdate;
+        GameManager.instance.OnAllyKilled += UpdateStarCount;
+
         GameManager.instance.OnTimesUp += OnTimesUp;
         GameManager.instance.OnComplete += OnComplete;
     }
@@ -80,7 +86,7 @@ public class GameUI : MonoBehaviour
             LeanTween.scale(countdown.rectTransform, countdownScale, 0.33f)
                 .setEaseOutElastic();
             
-            AudioManager.Play(SFX.Tick);
+            AudioManager.Play(SFX.Countdown);
         }   
         else
         {
@@ -89,7 +95,7 @@ public class GameUI : MonoBehaviour
             go.GetComponent<CanvasGroup>().LeanAlpha(0, 0.1f)
                 .setOnComplete(() => go.SetActive(false));
 
-            AudioManager.Play(SFX.Click);
+            AudioManager.Play(SFX.Go);
         }   
     }
 
@@ -151,6 +157,16 @@ public class GameUI : MonoBehaviour
             
             AudioManager.Play(SFX.Collect);
         }
+    }
+
+    private void UpdateStarCount()
+    {
+        int count = GameManager.instance.rating;
+
+        if (count < 0)
+            starCount.text = "!";
+        else
+            starCount.text = count.ToString();
     }
 
     public void MainMenu()

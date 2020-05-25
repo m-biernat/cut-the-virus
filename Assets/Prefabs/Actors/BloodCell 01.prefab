@@ -68,6 +68,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 0}
+  brokenStar: {fileID: 4686934947935803494, guid: 1e529d1cd2ee1ab4685520e2c3565d13,
+    type: 3}
 --- !u!1001 &8687517070295113268
 PrefabInstance:
   m_ObjectHideFlags: 0

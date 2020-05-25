@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public event Action OnStart;
 
     public event Action OnTick;
+    public event Action OnAllyKilled;
 
     public event Action OnTimesUp;
     public event Action OnComplete;
@@ -71,6 +72,9 @@ public class GameManager : MonoBehaviour
     {
         alliesDestroyed++;
         //Debug.Log($"Destroyed allies {alliesDestroyed} of {alliesCount}");
+
+        UpdateRating();
+        OnAllyKilled();
 
         if (alliesDestroyed > 3)
             failed = true;     
@@ -130,6 +134,11 @@ public class GameManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void UpdateRating()
+    {
+        rating = 3 - alliesDestroyed;
+    }
+
     public void Complete()
     {
         int index = LevelLoader.currentLevelIndex;
@@ -138,8 +147,7 @@ public class GameManager : MonoBehaviour
         bool progress = false;
 
         //Debug.Log("Allies destroyed " + alliesDestroyed);
-
-        rating = 3 - alliesDestroyed;
+        UpdateRating();
 
         if (level.rating < rating)
         {
