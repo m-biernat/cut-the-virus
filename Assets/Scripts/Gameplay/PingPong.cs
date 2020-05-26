@@ -5,19 +5,53 @@ public class PingPong : MonoBehaviour
     public Transform destination;
     public float time;
 
-    private int id = 0;
+    [Space]
+    public float delay = 0;
+
+    private Vector3 origin;
+    private bool toOrigin = true;
 
     private void Start()
     {
-        id = LeanTween
+        origin = transform.position;
+
+        if (delay == 0)
+            Loop();
+        else
+            DelayedLoop(destination.position);
+    }
+
+    private void Loop()
+    {
+        LeanTween
             .moveLocal(gameObject, destination.position, time)
             .setLoopPingPong()
+            .setEaseInOutSine();
+    }
+
+    private void DelayedLoop(Vector3 moveTo)
+    {
+        LeanTween
+            .moveLocal(gameObject, moveTo, time)
             .setEaseInOutSine()
-            .id;
+            .setDelay(delay)
+            .setOnComplete(() =>
+            {
+                if (toOrigin)
+                {
+                    toOrigin = false;
+                    DelayedLoop(origin);
+                }
+                else
+                {
+                    toOrigin = true;
+                    DelayedLoop(destination.position);
+                }
+            });
     }
 
     private void OnDestroy()
     {
-        LeanTween.cancel(id);
+        LeanTween.cancel(gameObject);
     }
 }
