@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
+[ExecuteInEditMode]
 public class LevelBounds : MonoBehaviour
 {
     private LineRenderer boundsRenderer;
