@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 375807970462421205}
   - component: {fileID: 7517610673644510533}
   m_Layer: 0
-  m_Name: text3
+  m_Name: Tooltip 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,8 +25,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651916202349733546}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.62, y: 1.53, z: 0}
-  m_LocalScale: {x: 1.2483, y: 1.2483, z: 1.2483}
+  m_LocalPosition: {x: 0.68, y: 2.41, z: 0}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_Children: []
   m_Father: {fileID: 5023224552959780715}
   m_RootOrder: 4
