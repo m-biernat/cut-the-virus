@@ -108,7 +108,10 @@ public class GameUI : MonoBehaviour
         LeanTween.cancel(clockID);
 
         if (GameManager.instance.failed)
+        {
             timesUp.GetComponentInChildren<Text>().text = "FAILED!";
+            timesUp.transform.GetChild(1).gameObject.SetActive(true);
+        }
 
         FadeIn(timesUp);
     }
