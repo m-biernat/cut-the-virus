@@ -34,6 +34,9 @@ public class PlatformManager : MonoBehaviour
 
         switch (aspectRatio)
         {
+            case 46:
+                SetFOV(70.0f);
+                break;
             case 48:
                 SetFOV(67.8f);
                 break;
