@@ -84,8 +84,6 @@ public class LevelData : MonoBehaviour
 
     public void Save()
     {
-#if !UNITY_EDITOR
-        PlayerPrefs.SetString("savedData", new string(savedData));
-#endif
+        //PlayerPrefs.SetString("savedData", new string(savedData));
     }
 }
