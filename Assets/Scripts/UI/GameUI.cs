@@ -43,6 +43,7 @@ public class GameUI : MonoBehaviour
         GameManager.instance.OnComplete += OnComplete;
     }
 
+    // Initializes clock;
     public void Init(int time)
     {
         this.time = time;
@@ -51,6 +52,7 @@ public class GameUI : MonoBehaviour
         countdown.text = "";
     }
 
+    // Updates the clock on every tick
     private void OnClockUpdate()
     {
         int currTime = GameManager.timeLeft - 1;
@@ -99,6 +101,7 @@ public class GameUI : MonoBehaviour
         }   
     }
 
+    // Occurs when player failed or didn't finish level in time
     private void OnTimesUp()
     {
         if (GameManager.instance.hasEnded)
@@ -116,6 +119,7 @@ public class GameUI : MonoBehaviour
         FadeIn(timesUp);
     }
 
+    // Occurs when player complete the level
     private void OnComplete()
     {
         if (GameManager.instance.hasEnded)
@@ -130,6 +134,7 @@ public class GameUI : MonoBehaviour
         FadeIn(complete, () => ShowStar(0));
     }
 
+    // Fades in the complete or timesup screen
     private void FadeIn(GameObject gameObject, Action onComplete = null)
     {
         CanvasGroup canvas = gameObject.GetComponent<CanvasGroup>();
@@ -144,6 +149,7 @@ public class GameUI : MonoBehaviour
         seq.append(onComplete);
     }
 
+    // Animates the stars when complete screen is activated
     private void ShowStar(int n)
     {
         if (n < GameManager.instance.rating)
@@ -162,6 +168,7 @@ public class GameUI : MonoBehaviour
         }
     }
 
+    // Updates star count in UI
     private void UpdateStarCount()
     {
         int count = GameManager.instance.rating;

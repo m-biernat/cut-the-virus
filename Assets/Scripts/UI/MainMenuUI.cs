@@ -45,6 +45,7 @@ public class MainMenuUI : MonoBehaviour
         }
     }
 
+    // Initializes level grid for every level
     private void InitLevelGrid()
     {
         int levelCount = levelData.levels.Count;
@@ -58,6 +59,7 @@ public class MainMenuUI : MonoBehaviour
         }
     }
 
+    // Switches between "views"
     public void ChangeView(GameObject to)
     {
         AudioManager.Play(SFX.Click);
@@ -66,6 +68,7 @@ public class MainMenuUI : MonoBehaviour
         currentView = to;
     }
 
+    // Makes smooth transition beteween views
     private void FadeToView(GameObject from, GameObject to)
     {
         CanvasGroup fromCanvas = from.GetComponent<CanvasGroup>();

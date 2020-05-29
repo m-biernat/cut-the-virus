@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         enabled = false;
     }
 
+    // Gets inputs from player and executes reactions
     private void Update()
     {
         if (Input.GetMouseButton(0) && !isPlayerMoving)
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Sends raycast and checks collision hits
     private void DetectHits()
     {
         Vector3 heading = position - transform.position;
@@ -97,6 +99,7 @@ public class PlayerController : MonoBehaviour
         hits = Physics.RaycastAll(transform.position, direction, distance);
     }
 
+    // Checks if move to certain point on screen meets requirements
     private void CheckIfMoveIsPossible()
     {
         bool virusFound = false, fatFound = false;
@@ -125,11 +128,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Enables game controller when countdown has finished
     private void OnGameStart()
     {
         enabled = true;
     }
 
+    // Disables game controller when one of endings occured
     private void OnGameEnd()
     {
         pathRenderer.Clear();

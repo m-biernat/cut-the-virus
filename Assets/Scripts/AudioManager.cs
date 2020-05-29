@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
     }
 
+    // Switches sound volume between 0 and 1
     public static void Toggle()
     {
         switch (isMuted)
@@ -35,6 +36,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // Plays certain sound effect
     public static void Play(SFX effectName)
     {
         instance.sfx[(int)effectName].Play();

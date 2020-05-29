@@ -10,6 +10,7 @@ public class Level : MonoBehaviour
     public event Action OnAllyDestroy;
     public event Action OnEnemyDestroy;
 
+    // Initializes references in actors (destructibles)
     private void Start()
     {
         foreach (var bloodCell in bloodCells)

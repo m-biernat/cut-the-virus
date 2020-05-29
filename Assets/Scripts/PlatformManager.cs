@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// This class handles platform specific stuff (scaling, android action handlin etc.)
 public class PlatformManager : MonoBehaviour
 {
     public CanvasScaler canvasScaler;

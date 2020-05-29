@@ -8,6 +8,7 @@ public class PlayerPathRenderer : MonoBehaviour
     [SerializeField]
     private SpriteRenderer spriteRenderer = null;
 
+    // Draws a line indicating if moves is possible between two points
     public void Draw(Vector3 startPosition, Vector3 endPosition, bool isMovePossible)
     {
         transform.position = endPosition;

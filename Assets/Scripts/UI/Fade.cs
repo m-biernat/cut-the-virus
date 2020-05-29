@@ -15,11 +15,13 @@ public class Fade : MonoBehaviour
         FadeIn();
     }
 
+    // Fades in screen
     public void FadeIn()
     {
         canvasGroup.LeanAlpha(0, 0.2f).setOnComplete(() => gameObject.SetActive(false));
     }
 
+    // Fades out screen and executes action on complete
     public void FadeOut(Action action)
     {
         gameObject.SetActive(true);

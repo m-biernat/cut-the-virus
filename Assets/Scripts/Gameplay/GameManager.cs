@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log($"Game has started with {enemiesCount} enemies and {alliesCount} allies.");
     }
 
+    // Initializes the game (selected level) in Game scene
     private void InitGame()
     {
         GameObject go = Instantiate(LevelLoader.levelToLoad.levelPrefab);
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Timer());
     }
 
+    // Executes when BloodCell is destoyed
     private void OnAllyDestroy()
     {
         alliesDestroyed++;
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
             failed = true;     
     }
 
+    // Executes when Virus is destoyed
     private void OnEnemyDestroy()
     {
         enemiesDestroyed++;
@@ -103,6 +106,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Handles clock and timings in game
     private IEnumerator Timer()
     {
         yield return new WaitForSecondsRealtime(0.1f);
@@ -139,6 +143,7 @@ public class GameManager : MonoBehaviour
         rating = 3 - alliesDestroyed;
     }
 
+    // Executes when game is in "complete" state
     public void Complete()
     {
         int index = LevelLoader.currentLevelIndex;

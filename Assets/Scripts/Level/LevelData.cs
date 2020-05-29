@@ -20,6 +20,7 @@ public class LevelData : MonoBehaviour
 
     private static char[] savedData = null;
 
+    // Loads saved data (player progression)
     private void Awake()
     {
         if (savedData == null)
@@ -43,6 +44,7 @@ public class LevelData : MonoBehaviour
 #endif
     }
 
+    // If there is no saved data then loads defaults
     private void SetDefault()
     {
         savedData = new char[12];
@@ -55,6 +57,7 @@ public class LevelData : MonoBehaviour
         }
     }
 
+    // Setting progression based on saved data
     private void LoadSavedData()
     {
         for (int i = 0; i < levels.Count; i++)

@@ -21,6 +21,7 @@ public class PingPong : MonoBehaviour
             DelayedLoop(destination.position);
     }
 
+    // Animates moving from point A -> B and B -> A endlessly without delay
     private void Loop()
     {
         LeanTween
@@ -29,6 +30,7 @@ public class PingPong : MonoBehaviour
             .setEaseInOutSine();
     }
 
+    // Animates moving from point A -> B and B -> A endlessly with delay
     private void DelayedLoop(Vector3 moveTo)
     {
         LeanTween

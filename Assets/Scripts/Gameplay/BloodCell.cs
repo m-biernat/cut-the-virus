@@ -4,6 +4,7 @@ public class BloodCell : Destructible
 {
     public GameObject brokenStar;
 
+    // Method executes when BloodCell is destroyed
     public override void Destroy()
     {
         level.DestroyAlly();

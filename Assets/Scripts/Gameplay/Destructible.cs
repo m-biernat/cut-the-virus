@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// This class is parent for all destructibles in game
 public abstract class Destructible : MonoBehaviour
 {
     [HideInInspector]

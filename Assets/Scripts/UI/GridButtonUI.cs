@@ -26,6 +26,7 @@ public class GridButtonUI : MonoBehaviour
         Fade.instance.FadeOut(() => levelLoader.LoadLevel(index));
     }
 
+    // Sets up buttons instanciated in level grid
     public void SetUpButton(LevelLoader levelLoader, int index, LevelData.Level level)
     {
         if (level.unlocked)

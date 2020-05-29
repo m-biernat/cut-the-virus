@@ -19,6 +19,7 @@ public class LevelBounds : MonoBehaviour
         SetBoundsPositions();
     }
 
+    // Sets bounds positions for line renderer
     private void SetBoundsPositions()
     {
         boundsPositions = new Vector3[4];
@@ -31,6 +32,7 @@ public class LevelBounds : MonoBehaviour
         boundsRenderer.SetPositions(boundsPositions);
     }
 
+    // Checks if point is in bounds and clamps it
     public static void KeepInBounds(ref Vector3 position)
     {
         if (position.y < lowerBound)
