@@ -13,8 +13,10 @@ public class LevelData : MonoBehaviour
         public int rating;
     }
 
+#if UNITY_EDITOR
     [SerializeField]
     private bool unlockAll = false;
+#endif
 
     public List<Level> levels;
 
@@ -49,11 +51,11 @@ public class LevelData : MonoBehaviour
     {
         savedData = new char[12];
 
-        savedData[0] = (char)0;
+        savedData[0] = '0';
 
         for (int i = 1; i < levels.Count; i++)
         {
-            savedData[i] = (char)9;
+            savedData[i] = '9';
         }
     }
 
@@ -62,31 +64,33 @@ public class LevelData : MonoBehaviour
     {
         for (int i = 0; i < levels.Count; i++)
         {
-            if (savedData[i] == 9)
+            if (savedData[i] == '9')
             {
                 levels[i].unlocked = false;
             }
             else
             {
                 levels[i].unlocked = true;
-                levels[i].rating = savedData[i];
+                levels[i].rating = savedData[i] - '0';
             }
         }
     }
 
     public void SetRating(int index, int rating)
     {
-        savedData[index] = (char)rating;
+        savedData[index] = (char)(rating + '0');
     }
 
     public void Unlock(int index)
     {
-        savedData[index] = (char)0;
+        savedData[index] = '0';
         levels[index].unlocked = true;
     }
 
     public void Save()
     {
-        //PlayerPrefs.SetString("savedData", new string(savedData));
+#if !UNITY_EDITOR
+        PlayerPrefs.SetString("savedData", new string(savedData));
+#endif
     }
 }
