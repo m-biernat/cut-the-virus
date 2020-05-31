@@ -8,10 +8,36 @@ public class PlatformManager : MonoBehaviour
     public CanvasScaler canvasScaler;
     public LevelLoader levelLoader;
 
-#if UNITY_WEBGL
+#if UNITY_WEBGL || UNITY_STANDALONE
     private void Awake()
     {
         canvasScaler.matchWidthOrHeight = 1.0f;
+    }
+#endif
+
+#if UNITY_STANDALONE
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            if (Screen.fullScreen)
+                TurnOffFullscreen();
+            else
+            {
+                var res = Screen.currentResolution;
+                Screen.SetResolution(res.width, res.height, FullScreenMode.FullScreenWindow);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TurnOffFullscreen();
+        }
+    }
+
+    private void TurnOffFullscreen()
+    {
+        Screen.SetResolution(450, 800, false);
     }
 #endif
 
