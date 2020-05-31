@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class MainMenuUI : MonoBehaviour
 
     [Space]
     public GameObject quitButton;
+
+    [Space]
+    public Text resetProgress;
+    private int resetProgressStage = 0;
 
     private void Awake()
     {
@@ -83,6 +88,34 @@ public class MainMenuUI : MonoBehaviour
             to.SetActive(true);
         });
         seq.append(toCanvas.LeanAlpha(1, fadeSpeed));
+    }
+
+    public void ResetProgress()
+    {
+        switch(resetProgressStage)
+        {
+            case 0:
+                if (levelData.levels[1].unlocked)
+                {
+                    resetProgress.text = "ARE YOU SURE ABOUT THAT?";
+                    resetProgressStage++;
+                }
+                else
+                    resetProgress.text = "THERE\'S NOTHING TO RESET YET!";
+                break;
+            case 1:
+                resetProgress.text = "BUT ARE YOU REALLY SURE ABOUT THAT?";
+                resetProgressStage++;
+                break;
+            case 2:
+                resetProgress.text = "PRESS IT ONE MORE TIME TO RESET";
+                resetProgressStage++;
+                break;
+            case 3:
+                levelData.ResetProgress();
+                levelLoader.LoadMenu(false);
+                break;
+        }
     }
 
     public void QuitGame()

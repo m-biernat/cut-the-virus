@@ -93,4 +93,11 @@ public class LevelData : MonoBehaviour
         PlayerPrefs.SetString("savedData", new string(savedData));
 #endif
     }
+
+    public void ResetProgress()
+    {
+        SetDefault();
+        Save();
+        LoadSavedData();
+    }
 }
